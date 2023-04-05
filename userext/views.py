@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm,LoginForm
 from django.contrib.auth import login,authenticate,logout
+from .pullcsv import name
 
 
 def RegisterView(request):
     context={}
     if (request.POST):
-        
-        form=RegisterForm(request.POST)
+        data={'regno':request.POST['regno'],'password1':request.POST['password1'],'password2':request.POST['password2'],'name':''}
+        data['name']=name(data['regno'])
+        form=RegisterForm(data)
         if form.is_valid():
             form.save()
             regno=form.cleaned_data.get('regno')
@@ -16,6 +18,7 @@ def RegisterView(request):
             login(request,account)
             return redirect('temp')
         else:
+            form.fields.pop('name')
             context['registration_form']=form
     else:
         form=RegisterForm()

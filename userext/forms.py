@@ -2,7 +2,7 @@ from django import forms
 from .models import UserEXT
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
-from .pullcsv import check, name
+from .pullcsv import check
 
 
 
@@ -21,9 +21,7 @@ class RegisterForm(UserCreationForm):
         if(not(check(regno))):
             raise forms.ValidationError('Registration Number is not eligible for this event')
         return regno
-    def clean_name(self):
-        n=name(self.cleaned_data['regno'])
-        return n
+    
 
 class LoginForm(forms.ModelForm):
     password=forms.CharField(label="Password",widget=forms.PasswordInput)

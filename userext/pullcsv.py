@@ -15,4 +15,4 @@ def name(regno):
             if(row[0]==regno):
                 print("Success")
                 return row[1]
-        return "lol"
+        return 'NotFound'

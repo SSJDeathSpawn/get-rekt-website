@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from userext.views import tempview,RegisterView,LogOutView,LogInView
+from listteams.views import ListTeamsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +25,6 @@ urlpatterns = [
     path('', tempview, name="temp"),
     path('register/', RegisterView, name="register"),
     path('logout/', LogOutView, name="logout"),
-    path('login/', LogInView, name="login")
+    path('login/', LogInView, name="login"),
+    path('staff/',ListTeamsView,name='listteams'),
 ]

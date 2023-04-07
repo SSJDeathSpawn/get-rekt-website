@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from teamreg.models import Team,Entry
 
 
-def ListTeamsView(request):
+# Create your views here.
+def list_view(request):
     if(request.user.is_staff):
         context={}
         teams={}
@@ -16,4 +17,3 @@ def ListTeamsView(request):
     else:
         return HttpResponse('Fail')
 
-# Create your views here.

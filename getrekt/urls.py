@@ -23,4 +23,5 @@ urlpatterns = [
     path('', index),
     path('registration/', include('teamreg.urls')),
     path('user/', include('userext.urls')),
+    path('list/', include('listteams.urls'))
 ]

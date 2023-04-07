@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm,LoginForm
-from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth import login as login_user,authenticate,logout as logout_user
 from .pullcsv import name
 
 
-def RegisterView(request):
+def register(request):
     context={}
     if (request.POST):
         data={'regno':request.POST['regno'],'password1':request.POST['password1'],'password2':request.POST['password2'],'name':''}
@@ -15,8 +15,8 @@ def RegisterView(request):
             regno=form.cleaned_data.get('regno')
             raw_password=form.cleaned_data.get('password1')
             account=authenticate(regno=regno,password=raw_password)
-            login(request,account)
-            return redirect('temp')
+            login_user(request,account)
+            return redirect('userext:index')
         else:
             form.fields.pop('name')
             context['registration_form']=form
@@ -26,27 +26,27 @@ def RegisterView(request):
         context['registration_form']=form
     return render(request,'register.html',context)
 
-def tempview(request):
+def index(request):
     context={}
     return render(request,'temp.html',context)
 
-def LogOutView(request):
-    logout(request)
-    return redirect('temp')
+def logout(request):
+    logout_user(request)
+    return redirect('userext:index')
 
-def LogInView(request):
+def login(request):
     context={}
     user=request.user
     if (user.is_authenticated):
-        return redirect("temp")
+        return redirect("userext:index")
     if request.POST:
         form=LoginForm(request.POST)
         if (form.is_valid()):
             regno=request.POST['regno']
             password=request.POST['password']
             user=authenticate(regno=regno,password=password)
-            login(request,user)
-            return redirect('temp')
+            login_user(request,user)
+            return redirect('userext:index')
     
     else:
         form=LoginForm()

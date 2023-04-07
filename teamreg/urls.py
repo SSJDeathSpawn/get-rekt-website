@@ -1,7 +1,11 @@
 from django.urls import path
 
-from . import views
+from .views import index, create_team, enter, inteam
 
+app_name = 'teamreg'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', index, name='index'),
+    path('create/', create_team, name='create'),
+    path('join/', enter, name='join'),
+    path('inteam/', inteam, name='inteam')
 ]

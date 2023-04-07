@@ -16,15 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from userext.views import tempview,RegisterView,LogOutView,LogInView
-from listteams.views import ListTeamsView
+from .views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index),
     path('registration/', include('teamreg.urls')),
-    path('', tempview, name="temp"),
-    path('register/', RegisterView, name="register"),
-    path('logout/', LogOutView, name="logout"),
-    path('login/', LogInView, name="login"),
-    path('staff/',ListTeamsView,name='listteams'),
+    path('user/', include('userext.urls')),
 ]

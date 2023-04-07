@@ -7,21 +7,18 @@ from .pullcsv import check
 
 
 class RegisterForm(UserCreationForm):
-    regno=forms.CharField(max_length=9)
     
+    field_order=['regno', 'password1', 'password2', 'name']
+
     class Meta:
         model=UserEXT
         fields=('regno','password1','password2','name')
-
-
-    
     
     def clean_regno(self):
         regno=self.cleaned_data['regno']
         if(not(check(regno))):
             raise forms.ValidationError('Registration Number is not eligible for this event')
         return regno
-    
 
 class LoginForm(forms.ModelForm):
     password=forms.CharField(label="Password",widget=forms.PasswordInput)

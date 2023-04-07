@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from .pullcsv import name
+
 
 class UserManager(BaseUserManager):
-    use_in_migrations=True
+    use_in_migrations = True
 
-    def save_user(self,regno,password,**extra_fields):
+    def save_user(self, regno,password, **extra_fields):
         if not regno:
             raise ValueError("The given regno must be set")
         
@@ -32,11 +32,7 @@ class UserManager(BaseUserManager):
 class UserEXT(AbstractBaseUser,PermissionsMixin):
     regno=models.CharField(max_length=9,primary_key=True)
     name=models.CharField(max_length=200)
-
-
     is_staff = models.BooleanField(default=False)
-
-
     USERNAME_FIELD='regno'
 
     objects= UserManager()

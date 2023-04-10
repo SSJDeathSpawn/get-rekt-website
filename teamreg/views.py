@@ -1,54 +1,37 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .forms import EntryForm, TeamForm
-from .models import Entry
+from .forms import TeamForm, AddMemberForm
+from .models import Team, Student
 
 
 def index(request):
-    return HttpResponse('Test')
-
-@login_required(login_url='/user/login')
-def enter(request):
-    if Entry.objects.filter(user__regno=request.user.regno):
-        return redirect("teamreg:inteam")
-    else:
-        print(f"{request.user.regno} is not in any event")
-        print(Entry.objects.filter(user__regno=request.user.regno))
-    if request.method == 'POST':
-        form = EntryForm(request.POST, user=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('teamreg:index')
-    form = EntryForm(user=request.user)
-    context = {
-        'form': form,
-        'request': request
-    }
-    return render(request, 'jointeam.html', context)
+    return HttpResponse("Test")
 
 
-@login_required(login_url='/user/login')
+@login_required(login_url="/user/login")
 def create_team(request):
-    if Entry.objects.filter(user__regno=request.user.regno):
-        return redirect("teamreg:inteam")
-    else:
-        print(f"{request.user.regno} is not in any event")
-        print(Entry.objects.filter(user__regno=request.user.regno))
-    if request.method == 'POST':
-        form = TeamForm(request.POST)
+    if request.method == "POST":
+        form = TeamForm(request.POST, leader=request.user)
         if form.is_valid():
             team = form.save()
-            entry = Entry(user=request.user, team=team, leader=True)
-            entry.save()
-            return redirect('teamreg:index')
-    form = TeamForm()
-    context = {
-        'form': form,
-        'request': request
-    }
-    return render(request, 'newteam.html', context)
+            team.members.add(Student.objects.filter(regno=request.user.regno).first())
+            return redirect("teamreg:index")
+    form = TeamForm(leader=request.user)
+    context = {"form": form, "request": request}
+    return render(request, "newteam.html", context)
 
 
-def inteam(request):
-    return render(request, 'inteam.html', {'request': request})
+@login_required(login_url="/user/login")
+def add_members(request):
+    team = Team.objects.filter(leader=request.user).first()
+    if team is None:
+        return HttpResponseForbidden("You must be a team leader to add members")
+    if request.method == "POST":
+        form = AddMemberForm(request.POST)
+        if form.is_valid():
+            team.members.add(Student.objects.filter(regno=form.cleaned_data['regno']).first())
+            return redirect("teamreg:add")
+    form = AddMemberForm()
+    context = {"request": request, "form": form}
+    return render(request, "addmembers.html", context)

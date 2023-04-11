@@ -1,6 +1,5 @@
 from django import forms
-from django.core.exceptions import ValidationError
-from .models import Team, Student
+from .models import Team, Student, Game
 import re
 from userext.pullcsv import check
 
@@ -21,17 +20,28 @@ class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
         fields = ("name", "game")
+        widgets = {
+                    'game': 
+                    forms.CheckboxSelectMultiple
+                }
 
 
 class AddMemberForm(forms.Form):
     regno = forms.CharField(max_length=9)
 
-    def clean_user(self):
+    def __init__(self, *args, **kwargs):
+        self.team = kwargs.pop("team")
+        super(AddMemberForm, self).__init__(*args, **kwargs)
+    
+
+
+    def clean_regno(self):
         regno = self.cleaned_data["regno"]
         regno_reg = re.compile(r"[0-9]{2}[A-Za-z]{3}[0-9]{4}")
         if regno_reg.fullmatch(regno) is None:
-            raise ValidationError("Not a valid registration number")
+            raise forms.ValidationError("Not a valid registration number")
         if not check(regno):
-            raise ValidationError("Not a TAG Club Member")
+            raise forms.ValidationError("Not a TAG Club Member")
+        
 
         return regno

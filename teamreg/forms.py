@@ -20,6 +20,10 @@ class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
         fields = ("name", "game")
+        widgets = {
+                    'game': 
+                    forms.CheckboxSelectMultiple
+                }
 
 
 class AddMemberForm(forms.Form):
@@ -38,10 +42,6 @@ class AddMemberForm(forms.Form):
             raise forms.ValidationError("Not a valid registration number")
         if not check(regno):
             raise forms.ValidationError("Not a TAG Club Member")
-        else:
-            game=Game.objects.get(team=self.team)
-            count =Student.objects.filter(team__game=game,regno=regno).count()
-            if(count):
-                raise forms.ValidationError("This user is already in a team for this game")
+        
 
         return regno

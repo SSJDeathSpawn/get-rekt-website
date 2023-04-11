@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h2>Team</h2>
+
+<p>
+    <table>
+        <tr>
+            <th>RegNo</th>
+            <th>Name</th>
+            <th>Role</th>
+        </tr>
+        <tr>
+            <td>{{leader.regno}}</td>
+            <td>{{leader.name}}</td>
+            <td>Leader</td>
+        </tr>
+        <form method="post">
+            {% csrf_token %}
+            {% for key,value in members.items %}
+            <tr>
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+                <td>Member<button name="regno" type="submit" value={{key}}>Remove</button></td>
+            </tr>
+            {% endfor %}
+        </form>
+
+    </table>
+
+</p>
+
+
+
+{% endblock content %}

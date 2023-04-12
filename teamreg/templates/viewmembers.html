@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content%}
+  <div class="mx-auto mt-20 w-7/12 text-green-300 text-3xl">Team Members</div>
+
+    <div class="mx-auto w-7/12 mt-5">
+    <table class="table-auto text-white">
+      <thead>
+        <tr>
+            <th class="p-1">RegNo</th>
+            <th class="p-1">Name</th>
+            <th class="p-1">Role</th>
+            <th class="p-1">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td class="p-1">{{leader.regno}}</td>
+            <td class="p-1">{{leader.name}}</td>
+            <td class="p-1">Leader</td>
+        </tr>
+        <form method="post">
+            {% csrf_token %}
+            {% for key,value in members.items %}
+            <tr>
+                <td class="p-1">{{key}}</td>
+                <td class="p-1">{{value}}</td>
+                <td class="p-1">Member</td>
+                <td class="p-1"><button name="regno" type="submit" class="crazy-text" value={{key}}>Remove</button></td>
+            </tr>
+            {% endfor %}
+        </form>
+      </tbody>
+    </table>
+    </div>
+
+
+
+{% endblock content %}

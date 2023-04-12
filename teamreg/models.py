@@ -3,7 +3,6 @@ from userext.models import UserEXT
 
 
 # Create your models here.
-
 class Game(models.Model):
     short_name = models.CharField(max_length=3)
     name = models.CharField(max_length=20)
@@ -11,26 +10,28 @@ class Game(models.Model):
     def __str__(self):
         return self.name
 
+class Student(models.Model):
+
+    regno=models.CharField(max_length=9,primary_key=True)
+    name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=40)
+    phone = models.IntegerField()
+
+    class Meta:
+        ordering = ['regno']
+
+    def __str__(self):
+        return self.name
 
 class Team(models.Model):
 
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, primary_key=True)
     game = models.ManyToManyField(Game)
+    leader = models.ForeignKey(UserEXT, on_delete=models.CASCADE, related_name='leader')
+    members = models.ManyToManyField(Student)
 
     class Meta:
         ordering = ['name']
 
     def __str__(self):
         return self.name
-
-
-class Entry(models.Model):
-    user = models.ForeignKey(UserEXT, on_delete=models.CASCADE, null=True)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    leader = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.team.name + " - " + self.user.regno
-
-    class Meta:
-        verbose_name_plural = "entries"

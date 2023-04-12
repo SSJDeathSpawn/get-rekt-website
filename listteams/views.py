@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from teamreg.models import Team,Entry
+from teamreg.models import Team,Student
 
 
 # Create your views here.
@@ -9,8 +9,9 @@ def list_view(request):
         context={}
         teams={}
         for group in Team.objects.all():
-            members=Entry.objects.filter(team=group)
-            teams[group]=[i.user.name for i in members.filter(leader=True)]+[i.user.name for i in members.exclude(leader=True)]
+            members=group.members.exclude(regno=group.leader)
+            leader=Student.objects.filter(regno=group.leader)[0]
+            teams[group]=[leader.regno+" : "+leader.name]+list(i.regno+" : "+i.name for i in members)
         context['teams']=teams
         return render(request,'listteams.html',context)
 

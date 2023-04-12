@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    .box-shadow-crazy {
+      box-shadow: 0.3rem 0.3rem fuchsia;
+    }
+    .box-shadow-crazy:hover{
+      box-shadow: 0.3rem 0.3rem cyan;
+    }
+    </style>
+    <script>
+      function hide() {
+        var elem = document.getElementById('menu')
+        if (elem.style.display !== 'none'){
+          elem.style.display = 'none';
+        } else {
+          elem.style.display = 'block';
+        }
+      }
+    </script>
+  </head>
+  <body bgcolor="#051a2d">
+    <nav
+      class="flex border-b-4 border-fuchsia-500 items-center justify-between flex-wrap bg-zinc-800 p-6"
+    >
+      <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <span class="font-semibold text-3xl tracking-tight">getRekt</span>
+      </div>
+      <div class="block lg:hidden">
+        <button
+          class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+          onclick="hide()"
+        >
+          <svg
+            class="fill-current h-3 w-3"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+      </div>
+      <div id="menu" class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div class="text-lg lg:flex-grow"></div>
+        <div>
+          <a
+            href="#responsive-header"
+            class="block mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4"
+          >
+            Create Team
+          </a>
+          <a
+            href="#responsive-header"
+            class="block mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4"
+          >
+            Add Members
+          </a>
+          <a
+            href="#"
+            class="inline-block text-lg px-4 py-2 text-black box-shadow-crazy bg-cyan-300 leading-none rounded hover:bg-fuchsia-500 mt-4 lg:mt-0"
+            >Login</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="flex w-5/12 justify-between border-b-4 border-zinc-400 mx-auto mt-20">
+      <div class="flex w-1/6 p-2 text-green-400 border-b-4 border-green-400 mx-auto text-center justify-center text-2xl">
+        LOGIN
+      </div>
+      <div class="flex w-1/6 p-2 text-zinc-200 text-center mx-auto text-center justify-center text-2xl">
+        REGISTER
+      </div>
+    </div>
+
+    <div class="mt-10 mb-40 flex md:flex-shrink-0 content-center justify-center">
+      <form>
+      <div>
+          <input type="text" class="ring-5 ring-green-400 bg-transparent" />
+      </div>
+      </form>
+    </div>
+    
+
+    <footer class="bg-zinc-900 flex flex-wrap mt-40 mb-0 justify-center border-t-4 border-fuchsia-500">
+      <div class="text-fuchsia-500 block w-full text-2xl mt-2 text-center">
+        Contact Us
+      </div>
+      <div class="md:w-4/12 w-5/12 border-l-8 border-teal-400 pl-5 mt-2 mb-5">
+        <span class="block text-yellow-300 text-lg md:text-2xl">Name</span>
+        <span class="block text-cyan-800 text-sm md:text-md"> Event Coordinator </span> 
+        <span class="block text-white text-lg md:text-2xl">+91 7021249670<span>
+      </div>
+      <div class="md:w-3/12 w-4/12 border-l-8 border-teal-400 md:pl-20 pl-5 mt-2 mb-5">
+        <span class="block text-yellow-300 md:text-2xl text-lg">Name</span>
+        <span class="block text-cyan-800 md:text-md text-sm"> Event Coordinator </span> 
+        <span class="block text-white md:text-2xl text-md">Instagram<span>
+        <span class="block md:text-xl text-md">&nbsp;<span>
+        <span class="block text-rose-600 text-lg md:text-2xl">example@gmail.com<span>
+      </div>
+      <div class="w-full block text-center bg-zinc-950 text-white"> Copyright (c) 2023 TAG Club VIT. All Rights Reserved. </div>
+    </footer>
+  </body>
+</html>

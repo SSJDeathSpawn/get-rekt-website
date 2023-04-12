@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content%}
-<h2>Register</h2>
-
+    <div class="flex w-7/12 justify-between border-b-4 border-zinc-400 mx-auto mt-20">
+      <div class="flex w-1/6 p-2 text-zinc-200 mx-auto text-center justify-center text-2xl">
+        <a href="{% url 'userext:login' %}">LOGIN</a>
+      </div>
+      <div class="flex w-1/6 p-2 text-cyan-400 border-b-4 border-cyan-400 text-center mx-auto text-center justify-center text-2xl">
+        REGISTER
+      </div>
+    </div>
 <form method="post">
     {% csrf_token %}
+      <div class="mx-auto w-5/12 mt-5">
     {% for field in registration_form %}
 
     <p>
-        {{field.label_tag}}
+        <div class="text-white mt-7">{{ field.label }}</div>
         {{field}}
 
         {% for error in field.errors %} 
@@ -18,8 +25,14 @@
 
     {% endfor %}
 
-    <button type="submit">Register</button>
-
+    {% if registration_form.non_field_errors %}
+        <div style="color: red;">
+            <p>{{registration_form.non_field_errors}}</p>
+        </div>
+    {% endif %}
+    
+    <button type="submit" class="mt-10 bg-yellow-300 rounded-md p-3 text-md font-semibold">Register</button>
+    </div>
 </form>
-
+</div>
 {% endblock content %}

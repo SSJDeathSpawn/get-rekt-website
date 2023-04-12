@@ -12,6 +12,10 @@
     .box-shadow-crazy:hover{
       box-shadow: 0.3rem 0.3rem cyan;
     }
+    .crazy-text:hover {
+      color: cyan;
+      text-shadow: 2px 2px fuchsia;
+    }
     </style>
     <script>
       function hide() {
@@ -29,7 +33,7 @@
       class="flex border-b-4 border-fuchsia-500 items-center justify-between flex-wrap bg-zinc-800 p-6"
     >
       <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <span class="font-semibold text-3xl tracking-tight">getRekt</span>
+        <a href="{% url 'index' %}" class="font-semibold text-3xl crazy-text tracking-tight">getRekt</a>
       </div>
       <div class="block lg:hidden">
         <button
@@ -48,45 +52,49 @@
       </div>
       <div id="menu" class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div class="text-lg lg:flex-grow"></div>
+        {% if request.user.is_authenticated %}
         <div>
           <a
-            href="#responsive-header"
+            href="{% url 'teamreg:create' %}"
             class="block mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4"
           >
             Create Team
           </a>
           <a
-            href="#responsive-header"
+            href="{% url 'teamreg:add' %}"
             class="block mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4"
           >
             Add Members
           </a>
           <a
-            href="#"
+            href="{% url 'teamreg:view' %}"
+            class="block mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4"
+          >
+            View Members
+          </a>
+          {% endif %}
+          
+        {% if request.user.is_authenticated %}
+          <a
+            href="{% url 'userext:logout' %}"
+            class="inline-block text-lg px-4 py-2 text-black box-shadow-crazy bg-cyan-300 leading-none rounded hover:bg-fuchsia-500 mt-4 lg:mt-0"
+            >Logout</a
+          >
+          {% else %}
+          <a
+            href="{% url 'userext:login' %}"
             class="inline-block text-lg px-4 py-2 text-black box-shadow-crazy bg-cyan-300 leading-none rounded hover:bg-fuchsia-500 mt-4 lg:mt-0"
             >Login</a
           >
+          {% endif %}
         </div>
       </div>
     </nav>
 
-    <div class="flex w-5/12 justify-between border-b-4 border-zinc-400 mx-auto mt-20">
-      <div class="flex w-1/6 p-2 text-green-400 border-b-4 border-green-400 mx-auto text-center justify-center text-2xl">
-        LOGIN
-      </div>
-      <div class="flex w-1/6 p-2 text-zinc-200 text-center mx-auto text-center justify-center text-2xl">
-        REGISTER
-      </div>
-    </div>
+    <!-- Main Content here -->
+    {% block content %}
 
-    <div class="mt-10 mb-40 flex md:flex-shrink-0 content-center justify-center">
-      <form>
-      <div>
-          <input type="text" class="ring-5 ring-green-400 bg-transparent" />
-      </div>
-      </form>
-    </div>
-    
+    {% endblock content %}
 
     <footer class="bg-zinc-900 flex flex-wrap mt-40 mb-0 justify-center border-t-4 border-fuchsia-500">
       <div class="text-fuchsia-500 block w-full text-2xl mt-2 text-center">

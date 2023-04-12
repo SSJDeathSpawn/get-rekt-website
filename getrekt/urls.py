@@ -20,7 +20,7 @@ from .views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    path('', index, name='index'),
     path('registration/', include('teamreg.urls')),
     path('user/', include('userext.urls')),
     path('list/', include('listteams.urls'))

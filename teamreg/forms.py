@@ -2,6 +2,7 @@ from django import forms
 from .models import Team, Student, Game
 import re
 from userext.pullcsv import check
+from functools import partial
 
 
 class TeamForm(forms.ModelForm):
@@ -17,17 +18,19 @@ class TeamForm(forms.ModelForm):
             self.save_m2m()
         return inst
 
+    name = forms.CharField(widget=forms.TextInput(attrs={"class": "mt-2 block text-xl rounded-sm p-2 text-white ring-4 ring-green-400 bg-transparent focus-visible:outline-none"}))
+    game = forms.ModelMultipleChoiceField(queryset=Game.objects.all(), widget=forms.CheckboxSelectMultiple(attrs={'class': 'text-white'}))
+
     class Meta:
         model = Team
         fields = ("name", "game")
-        widgets = {
-                    'game': 
-                    forms.CheckboxSelectMultiple
-                }
+        # widgets = {
+        #         'game' : forms.CheckboxSelectMultiple(attrs={'class': 'text-white'})
+        # }
 
 
 class AddMemberForm(forms.Form):
-    regno = forms.CharField(max_length=9)
+    regno = forms.CharField(max_length=9, widget=forms.TextInput(attrs={"class": "mt-2 block text-xl rounded-sm p-2 text-white ring-4 ring-green-400 bg-transparent focus-visible:outline-none"}))
 
     def __init__(self, *args, **kwargs):
         self.team = kwargs.pop("team")

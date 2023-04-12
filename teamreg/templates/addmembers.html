@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Team Registration</h2>
+  <div class="mx-auto mt-20 w-7/12 text-green-300 text-3xl">Add Members</div>
+
   <form method="post">
       {% csrf_token %}
+      <div class="mx-auto w-7/12 mt-5">
       {% for field in form %}
 
-      <p>
-          {{field.label_tag}}
+          <div class="text-white mt-7">{{ field.label }}</div>
           {{field}}
 
           {% for error in field.errors %} 
               <p style="color: red;">{{error}}</p>
           {% endfor %}
-      </p>
 
       {% endfor %}
 
@@ -23,6 +23,8 @@
           </div>
       {% endif %}
 
-      <button type="submit">Add members</button>
+      <button type="submit" class="mt-10 bg-yellow-300 rounded-md p-3 text-md font-semibold">Add Member</button>
+      </div>
   </form>
+  </div>
 {% endblock content %}

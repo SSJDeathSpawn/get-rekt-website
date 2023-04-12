@@ -27,8 +27,7 @@ def register(request):
     return render(request,'register.html',context)
 
 def index(request):
-    context={}
-    return render(request,'temp.html',context)
+    return redirect('index')
 
 def logout(request):
     logout_user(request)

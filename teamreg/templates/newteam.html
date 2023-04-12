@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Team Registration</h2>
+  <div class="mx-auto mt-20 w-7/12 text-green-300 text-3xl">Create a team</div>
+  
   <form method="post">
       {% csrf_token %}
-      {% for field in form %}
+      <div class="mx-auto w-7/12 mt-5">
+        {% for field in form %}
 
-      <p>
-          {{field.label_tag}}
-          {{field}}
+          <div class="text-white mt-7">{{ field.label }}</div>
+        {{ field }}
 
-          {% for error in field.errors %} 
-              <p style="color: red;">{{error}}</p>
-          {% endfor %}
-      </p>
+            {% for error in field.errors %} 
+                <p style="color: red;">{{error}}</p>
+            {% endfor %}
 
-      {% endfor %}
+        {% endfor %}
 
       {% if form.non_field_errors %}
           <div style="color: red;">
@@ -23,6 +23,8 @@
           </div>
       {% endif %}
 
-      <button type="submit">Create Team</button>
+      <button type="submit" class="mt-10 bg-rose-500 rounded-md p-3 text-md font-semibold">Create Team</button>
+      </div>
   </form>
+  </div>
 {% endblock content %}

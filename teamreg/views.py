@@ -6,7 +6,7 @@ from .models import Team, Student
 
 
 def index(request):
-    return HttpResponse("Test")
+    return redirect('index')
 
 
 @login_required(login_url="/user/login")

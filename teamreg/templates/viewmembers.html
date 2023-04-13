@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content%}
+
+  {% for game,team in games.items %}
+  <p class="mx-auto mt-40 w-7/12 text-green-300 text-3xl heading glitch">{{game}}</p>
   <div class="mx-auto mt-40 w-7/12 text-green-300 text-3xl heading glitch">Team Members</div>
 
     <div class="mx-auto w-7/12 mt-10 mb-80">
@@ -15,24 +18,25 @@
       </thead>
       <tbody>
         <tr>
-            <td class="p-2">{{leader.regno}}</td>
-            <td class="p-2">{{leader.name}}</td>
+            <td class="p-2">{{team.leader.regno}}</td>
+            <td class="p-2">{{team.leader.name}}</td>
             <td class="p-2">Leader</td>
         </tr>
         <form method="post">
             {% csrf_token %}
-            {% for key,value in members.items %}
+            {% for key,value in team.members.items %}
             <tr>
                 <td class="p-2">{{key}}</td>
                 <td class="p-2">{{value}}</td>
                 <td class="p-2">Member</td>
-                <td class="p-2"><button name="regno" type="submit" class="crazy-text" value={{key}}>Remove</button></td>
+                <td class="p-2"><button name="regno" type="submit" class="crazy-text" value="{{key}} {{game}}">Remove</button></td>
             </tr>
             {% endfor %}
         </form>
       </tbody>
     </table>
     </div>
+    {% endfor %}
 
 
 

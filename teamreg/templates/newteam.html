@@ -29,7 +29,7 @@
         {{ field }}
 
             {% for error in field.errors %} 
-                <p style="color: red;">{{error}}</p>
+                <p style="color: red;">{{field.label}}::{{error}}</p>
             {% endfor %}
 
         {% endfor %}

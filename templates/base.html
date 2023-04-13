@@ -40,7 +40,7 @@
                 position: fixed;
                 z-index: -1;
                 filter: blur(100px);
-                animation: rotate 30s linear infinite alternate;
+                animation: rotate 15s linear infinite alternate;
             }
             @media(prefers-color-scheme:dark) {
                 .circle {
@@ -85,7 +85,7 @@
             .animate {
 
                 opacity: 0;
-                transition: all 0.3s ease-in-out;
+                transition: all 1s ease-in-out;
 
             }
 
@@ -134,6 +134,12 @@
 
             .form-header {
                 margin-bottom: 20px;
+            }
+
+
+            .space {
+                margin: 100px 0 100px 0;
+
             }
         </style>
 
@@ -184,21 +190,21 @@
         {% block content %}{% endblock content %}
 
         <footer class="bg-zinc-900 flex flex-wrap mt-40 mb-0 justify-center border-t-4 border-fuchsia-500">
-            <div class="text-fuchsia-500 block w-full text-2xl mt-2 text-center">
+            <div class="text-fuchsia-500 block w-full text-2xl mt-2 text-center heading">
                 Contact Us
             </div>
             <div class="md:w-4/12 w-5/12 border-l-8 border-teal-400 pl-5 mt-2 mb-5">
-                <span class="block text-yellow-300 text-lg md:text-2xl">Name</span>
-                <span class="block text-cyan-800 text-sm md:text-md">
+                <span class="block text-yellow-300 text-lg md:text-2xl heading">Name</span>
+                <span class="block text-cyan-800 text-sm md:text-md heading">
                     Event Coordinator
                 </span>
                 <span class="block text-white text-lg md:text-2xl">+91 7021249670<span></div>
                     <div class="md:w-3/12 w-4/12 border-l-8 border-teal-400 md:pl-20 pl-5 mt-2 mb-5">
-                        <span class="block text-yellow-300 md:text-2xl text-lg">Name</span>
-                        <span class="block text-cyan-800 md:text-md text-sm">
+                        <span class="block text-yellow-300 md:text-2xl text-lg heading">Name</span>
+                        <span class="block text-cyan-800 md:text-md text-sm heading">
                             Event Coordinator
                         </span>
-                        <span class="block text-white md:text-2xl text-md">Instagram<span>
+                        <span class="block text-white md:text-2xl text-md heading">Instagram<span>
                                 <span class="block md:text-xl text-md">&nbsp;<span>
                                         <span class="block text-rose-600 text-lg md:text-2xl">example@gmail.com<span></div>
                                             <div class="w-full block text-center bg-zinc-950 text-white">

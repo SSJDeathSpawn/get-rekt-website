@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="mx-auto mt-20 w-7/12 text-green-300 text-3xl">Create a team</div>
+  <div class="mx-auto mt-20 w-7/12 text-green-300 text-3xl heading">Create a team</div>
   
   <form method="post">
       {% csrf_token %}
@@ -23,7 +23,7 @@
           </div>
       {% endif %}
 
-      <button type="submit" class="mt-10 bg-rose-500 rounded-md p-3 text-md font-semibold">Create Team</button>
+      <button type="submit" class="mt-10 bg-rose-500 rounded-md p-3 text-md heading">Create Team</button>
       </div>
   </form>
   </div>

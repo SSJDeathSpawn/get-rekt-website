@@ -1,32 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content%}
-  <div class="mx-auto mt-20 w-7/12 text-green-300 text-3xl heading glitch">Team Members</div>
+  <div class="mx-auto mt-40 w-7/12 text-green-300 text-3xl heading glitch">Team Members</div>
 
-    <div class="mx-auto w-7/12 mt-5">
-    <table class="table-auto text-white">
+    <div class="mx-auto w-7/12 mt-10 mb-80">
+    <table class="table-auto text-white text-lg">
       <thead>
         <tr>
-            <th class="p-1">RegNo</th>
-            <th class="p-1">Name</th>
-            <th class="p-1">Role</th>
-            <th class="p-1">Action</th>
+            <th class="p-2">RegNo</th>
+            <th class="p-2">Name</th>
+            <th class="p-2">Role</th>
+            <th class="p-2">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-            <td class="p-1">{{leader.regno}}</td>
-            <td class="p-1">{{leader.name}}</td>
-            <td class="p-1">Leader</td>
+            <td class="p-2">{{leader.regno}}</td>
+            <td class="p-2">{{leader.name}}</td>
+            <td class="p-2">Leader</td>
         </tr>
         <form method="post">
             {% csrf_token %}
             {% for key,value in members.items %}
             <tr>
-                <td class="p-1">{{key}}</td>
-                <td class="p-1">{{value}}</td>
-                <td class="p-1">Member</td>
-                <td class="p-1"><button name="regno" type="submit" class="crazy-text" value={{key}}>Remove</button></td>
+                <td class="p-2">{{key}}</td>
+                <td class="p-2">{{value}}</td>
+                <td class="p-2">Member</td>
+                <td class="p-2"><button name="regno" type="submit" class="crazy-text" value={{key}}>Remove</button></td>
             </tr>
             {% endfor %}
         </form>

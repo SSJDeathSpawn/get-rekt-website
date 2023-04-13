@@ -18,6 +18,11 @@ class TeamForm(forms.ModelForm):
             self.save_m2m()
         return inst
 
+    def clean(self):
+        if Team.objects.filter(name=self.cleaned_data['name']):
+            print("Should error!")
+            raise forms.ValidationError("Team name already exists!")
+
     name = forms.CharField(widget=forms.TextInput(attrs={"class": "mt-2 block text-xl rounded-sm p-2 text-white ring-4 ring-green-400 bg-transparent focus-visible:outline-none"}))
     game = forms.ModelMultipleChoiceField(queryset=Game.objects.all(), widget=forms.CheckboxSelectMultiple(attrs={'class': 'text-white'}))
 

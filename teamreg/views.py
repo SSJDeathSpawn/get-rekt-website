@@ -1,9 +1,9 @@
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+
 from .forms import TeamForm, AddMemberForm
 from .models import Team, Student
-
 
 def index(request):
     return redirect('index')
@@ -16,9 +16,13 @@ def create_team(request):
         if form.is_valid():
             team = form.save()
             team.members.add(Student.objects.filter(regno=request.user.regno).first())
-            return redirect("teamreg:index")
+            return redirect("teamreg:view")
+        else:
+            context = {"form": form, "request": request}
+            return render(request, "newteam.html", context)
     form = TeamForm(leader=request.user)
     context = {"form": form, "request": request}
+    print(bool(request.user.leader.all()))
     return render(request, "newteam.html", context)
 
 

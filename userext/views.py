@@ -19,11 +19,11 @@ def register(request):
             return redirect('userext:index')
         else:
             form.fields.pop('name')
-            context['registration_form']=form
+            context['form']=form
     else:
         form=RegisterForm()
         form.fields.pop('name')
-        context['registration_form']=form
+        context['form']=form
     return render(request,'register.html',context)
 
 def index(request):
@@ -50,5 +50,5 @@ def login(request):
     else:
         form=LoginForm()
 
-    context['login_form']=form
+    context['form']=form
     return render(request,'login.html',context)

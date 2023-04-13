@@ -38,7 +38,7 @@ class AddMemberForm(forms.Form):
     
 
 
-    def clean_regno(self):
+    def clean(self):
         regno = self.cleaned_data["regno"]
         regno_reg = re.compile(r"[0-9]{2}[A-Za-z]{3}[0-9]{4}")
         if regno_reg.fullmatch(regno) is None:
@@ -47,4 +47,4 @@ class AddMemberForm(forms.Form):
             raise forms.ValidationError("Not a TAG Club Member")
         
 
-        return regno
+        

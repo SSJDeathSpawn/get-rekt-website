@@ -31,7 +31,7 @@ def add_members(request):
         form = AddMemberForm(request.POST,team=team)
         if form.is_valid():
             
-            team.members.add(Student.objects.filter(regno=form.cleaned_data['regno']).first())
+            team.members.add(Student.objects.get(regno=form.cleaned_data['regno']))
             return redirect("teamreg:add")
         else:
            context = {"request": request, "form": form}

@@ -3,7 +3,7 @@ from .models import UserEXT
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from .pullcsv import check
-
+import re
 
 class RegisterForm(UserCreationForm):
     field_order = ["regno", "password1", "password2", "name"]
@@ -38,13 +38,14 @@ class RegisterForm(UserCreationForm):
         }
         labels = {"password": "Password", "regno": "Registration Number"}
 
-    def clean_regno(self):
+    def clean(self):
         regno = self.cleaned_data["regno"]
-        if not (check(regno)):
-            raise forms.ValidationError(
-                "Registration Number is not eligible for this event"
-            )
-        return regno
+        regno_reg = re.compile(r"[0-9]{2}[A-Za-z]{3}[0-9]{4}")
+        if regno_reg.fullmatch(regno) is None:
+            raise forms.ValidationError("Not a valid registration number")
+        if not check(regno):
+            raise forms.ValidationError("Not a TAG Club Member")
+        
 
 
 class LoginForm(forms.ModelForm):

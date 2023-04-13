@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="mx-auto mt-20 w-7/12 text-green-300 text-3xl">Add Members</div>
+  <div class="mx-auto mt-20 w-7/12 text-green-300 text-3xl heading glitch">Add Members</div>
 
   <form method="post">
       {% csrf_token %}
@@ -23,7 +23,7 @@
           </div>
       {% endif %}
 
-      <button type="submit" class="mt-10 bg-yellow-300 rounded-md p-3 text-md font-semibold">Add Member</button>
+      <button type="submit" class="mt-10 bg-rose-500 rounded-md p-3 text-md heading">Add Member</button>
       </div>
   </form>
   </div>

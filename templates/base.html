@@ -12,13 +12,27 @@
 
             @import url('https://fonts.googleapis.com/css2?family=Monoton');:root {
                 --heading: 'Monoton', sans-serif;
+                --primary: #1b1f2a;
+                --secondary: #df2046;
+                --tertiary: cyan;
 
+
+            }
+            body {
+                
+                background-color: var(--secondary);
+ 
+            }
+
+            nav {
+                background-color: var(--primary);
             }
 
 
             .heading {
                 font-family: var(--heading);
                 letter-spacing: 1px;
+                color: var(--tertiary);
             }
 
             .box-shadow-crazy {
@@ -41,17 +55,9 @@
                 z-index: -1;
                 filter: blur(100px);
                 animation: rotate 15s linear infinite alternate;
+                background-image: linear-gradient(to right, var(--secondary),var(--primary));
             }
-            @media(prefers-color-scheme:dark) {
-                .circle {
-                    background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-                }
-            }
-            @media(prefers-color-scheme:light) {
-                .circle {
-                    background-image: linear-gradient(to right, #cdccd5, #867fd6, #B2DDF7);
-                }
-            }
+           
             @keyframes rotate {
 
                 100% {
@@ -215,21 +221,16 @@
                     transition-delay: 0s !important;
                 }
             }
-
-
-            button {
-                background-color: red;
-            }
         </style>
 
     </head>
-    <body bgcolor="#051a2d">
+    <body>
         <div class="circle one"></div>
         <div class="circle two"></div>
         <div class="circle three"></div>
         <div class="circle four"></div>
 
-        <nav class="flex border-b-4 border-fuchsia-500 items-center justify-between flex-wrap bg-zinc-800 p-6 font-Almaria,serif">
+        <nav class="flex border-b-4 border-fuchsia-500 items-center justify-between flex-wrap p-6 font-Almaria,serif">
             <div class="flex items-center flex-shrink-0 text-white mr-6">
                 <a href="{% url 'index' %}" class="font-semibold text-3xl crazy-text tracking-tight heading glitch">getRekt</a>
             </div>

@@ -16,6 +16,16 @@
             }
 
 
+            .move {
+                transform: translateY(10px);
+
+            }
+
+            .moveu {
+                transform: translateY(-15px);
+            }
+
+
             .flexing {
                 display: flex;
                 flex-direction: column;
@@ -194,7 +204,7 @@
                 animation: glitch 650ms infinite;
                 clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
                 transform: translate(-0.025em, -0.0125em);
-                /* color: green; */
+                 color: green; 
                 opacity: 0.8;
             }
 
@@ -202,9 +212,15 @@
                 animation: glitch 375ms infinite;
                 clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
                 transform: translate(0.0125em, 0.025em);
-                /* color: red; */
+                color: red; 
                 opacity: 0.8;
             }
+
+            #menu {
+                margin-top: 20px;
+            }
+
+            
 
 
             @keyframes glitch {
@@ -252,7 +268,7 @@
 
         <nav class="flex items-center justify-between flex-wrap p-6 bg-transparent font-Almaria,serif">
             <div class="flex items-center flex-shrink-0 text-white mr-6">
-                <a href="{% url 'index' %}" class="font-semibold text-3xl crazy-text tracking-tight heading-special glitch">R3CONFIG</a>
+                <a href="{% url 'index' %}" class="font-semibold text-3xl crazy-text tracking-tight heading-special glitch"><span>R3CONFIG</span><span>R3CONFIG</span><span>R3CONFIG</span></a>
             </div>
             <div class="block lg:hidden">
                 <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white " onclick="hide()">
@@ -280,9 +296,9 @@
                     {% endif %}
 
                     {% if request.user.is_authenticated %}
-                        <a href="{% url 'userext:logout' %}" class="inline-block text-lg px-4 py-2 text-cyan-200 leading-none mt-4 lg:mt-0 heading glitch">Logout</a>
+                        <a href="{% url 'userext:logout' %}" class="inline-block text-lg px-4 py-2 text-cyan-200 leading-none mt-5 lg:mt-0 heading glitch move login">Logout</a>
                     {% else %}
-                        <a href="{% url 'userext:login' %}" class="inline-block text-lg px-4 py-2 text-black box-shadow-crazy bg-cyan-300 leading-none rounded hover:bg-fuchsia-500 mt-4 lg:mt-0 heading glitch">Login</a>
+                        <a href="{% url 'userext:login' %}" class="inline-block text-lg px-4 py-2 text-black box-shadow-crazy bg-cyan-300 leading-none rounded hover:bg-fuchsia-500 mt-4 lg:mt-0 heading glitch move login">Login</a>
                     {% endif %}
                 </div>
             </div>

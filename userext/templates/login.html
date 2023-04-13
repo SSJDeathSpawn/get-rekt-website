@@ -20,7 +20,7 @@
   {% endif %}
     <div class="flex w-7/12 justify-between border-b-4 border-zinc-400 mx-auto mt-20">
       <div class="flex w-1/6 p-2 text-green-400 border-b-4 border-green-400 mx-auto text-center justify-center text-2xl heading glitch">
-        LOGIN
+        <span>LOGIN</span><span>LOGIN</span><span>LOGIN</span>
       </div>
       <div class="flex w-1/6 p-2 text-zinc-200 text-center mx-auto text-center justify-center text-2xl heading glitch">
         <a href="{% url 'userext:register' %}">REGISTER</a>
@@ -29,10 +29,12 @@
 <form method="post">
     {% csrf_token %}
       <div class="mx-auto w-5/12 mt-5 flexing">
+        
     {% for field in form %}
-
+          <div class="fieldset">
           <div class="text-white mt-7">{{ field.label }}</div>
         {{field}}
+      </div>
 
         {% for error in field.errors %} 
             <p style="color: red;">{{error}}</p>

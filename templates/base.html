@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,13 +7,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500');:root {
+            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Raleway');:root {
                 --heading: 'Orbitron', sans-serif;
+                --normal: 'Raleway', sans-serif;
                 --primary: #1b1f2a;
                 --secondary: #df2046;
                 --tertiary: #df2046;
+            }
 
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
 
+            input[type=number] {
+              -moz-appearance: textfield;
             }
 
 
@@ -48,6 +58,10 @@
                 color: var(--tertiary);
             }
 
+            .main {
+              font-family: var(--normal);
+            }
+
             .link-r {
                 color: white;
                 background-color: rgba(0, 0, 0, 0);
@@ -68,6 +82,16 @@
                 max-width: max-content;
             }
 
+            .link-c {
+                color: white;
+                background-color: rgba(0, 0, 0, 0);
+                border: 2px solid #02d9d9;
+                padding: 0.5em;
+                border-radius:12px ;
+                transition: all 300ms ease-in;
+                max-width: max-content;
+            }
+
             .link-r:hover {
                 color: black;
                 background-color: rgba(239, 70, 70);
@@ -77,6 +101,12 @@
             .link-y:hover {
                 color: black;
                 background-color: rgba(255, 230, 0);
+
+            }
+
+            .link-c:hover {
+                color: black;
+                background-color: cyan;
 
             }
 
@@ -175,23 +205,32 @@
 
             }
 
+            /*input[type="radio"] {
+              width: 1.05em;
+              height: 1.05em;
+              accent-color: yellow;
+              background-color: black;
+            }*/
 
-            input[type="checkbox"] {
-
-                /*                 display: inline-block;
- */ /*                 accent-color: orangered;
- */
-                height: 1.5em;
-                width: 1.5em;
-                border: 0.15em solid currentColor;
-
+            input[type="radio"] {
+              appearance: none;
+              width: 1.05em;
+              height: 1.05em;
+              border: 2px solid white;
+              border-radius: 50%;
+              background-clip: content-box;
+              padding: 3px;
+              transition: background-color 0.3s, border 0.3s;
             }
 
+            input[type="radio"]:checked {
+              background-color: yellow;
+              border: 2px solid yellow;
+            }
 
             .form-header {
                 margin-bottom: 20px;
             }
-
 
             .space {
                 margin: 100px 0;
@@ -284,7 +323,9 @@
 
         <nav class="flex items-center justify-between flex-wrap p-6 bg-transparent font-Almaria,serif">
             <div class="flex items-center flex-shrink-0 text-white mr-6">
-                <a href="{% url 'index' %}" class="font-semibold text-3xl crazy-text tracking-tight heading-special glitch"><span>R3CONFIG</span><span>R3CONFIG</span><span>R3CONFIG</span></a>
+              <a href="{% url 'index' %}" class="font-semibold text-3xl crazy-text tracking-tight heading-special glitch">
+                  <img src="{% static 'LOGO.png' %}"/>
+              </a>
             </div>
             <div class="block lg:hidden">
                 <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white " onclick="hide()">
@@ -295,7 +336,7 @@
                 </button>
             </div>
             <div id="menu" class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                <div class="text-lg lg:flex-grow"></div>
+                <div class="text-xl lg:flex-grow"></div>
                     <div>
                     {% if request.user.is_authenticated %}
                         <a href="{% url 'teamreg:create' %}" class="block mt-4 lg:inline-block  lg:mt-0 mr-4 link-r">
@@ -312,9 +353,9 @@
                     {% endif %}
 
                     {% if request.user.is_authenticated %}
-                        <a href="{% url 'userext:logout' %}" class="inline-block text-lg px-4 py-2 text-cyan-200 leading-none mt-5 lg:mt-0 heading glitch move login">Logout</a>
+                        <a href="{% url 'userext:logout' %}" class="inline-block text-xl px-4 pb-4 text-cyan-200 leading-none heading glitch login">Logout</a>
                     {% else %}
-                        <a href="{% url 'userext:login' %}" class="inline-block text-lg px-4 py-2 text-cyan-200 leading-none mt-4 lg:mt-0 heading glitch">Login</a>
+                        <a href="{% url 'userext:login' %}" class="inline-block text-xl px-4 pb-4 text-cyan-200 leading-none heading glitch">Login</a>
                     {% endif %}
                 </div>
             </div>
@@ -327,21 +368,21 @@
             <div class="text-red-700 block w-full text-4xl mt-2 mb-5 text-center heading">
                 Contact Us
             </div>
-            <div class="md:w-4/12 w-5/12 pl-5 mt-2 mb-5">
+            <div class="md:w-4/12 w-5/12 pl-5 mt-2 mb-5 border-r-2 border-red-700">
                 <span class="block text-yellow-300 text-lg md:text-2xl heading">Name</span>
-                <span class="block text-cyan-800 text-sm md:text-md heading">
+                <span class="block text-red-700 text-lg md:text-md heading">
                     Event Coordinator
                 </span>
-                <span class="block text-white text-lg md:text-2xl">+91 7021249670<span>
+                <span class="block text-white text-2xl md:text-2xl">+91 7021249670<span>
             </div>
-                    <div class="md:w-4/12 w-4/12 border-l-8 border-red-700 md:pl-20 pl-5 mt-2 mb-5">
+                    <div class="md:w-4/12 w-4/12 border-l-2 border-red-700 md:pl-20 pl-5 mt-2 mb-5">
                         <span class="block text-yellow-300 md:text-2xl text-lg heading">Name</span>
-                        <span class="block text-cyan-800 md:text-md text-sm heading">
+                        <span class="block text-red-700 md:text-lg text-sm heading">
                             Event Coordinator
                         </span>
                         <span class="block text-white md:text-2xl text-md heading">Instagram<span>
                                 <span class="block md:text-xl text-md">&nbsp;<span>
-                                        <span class="block text-red-700 text-lg md:text-2xl">example@gmail.com<span></div>
+                                        <span class="block text-red-700 text-2xl md:text-2xl">example@gmail.com<span></div>
                                            <div class="w-full block text-center bg-zinc-950 text-white">
                                                 Copyright (c) 2023 TAG Club VIT. All Rights Reserved.
                                             </div>

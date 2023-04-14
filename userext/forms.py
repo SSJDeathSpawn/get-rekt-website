@@ -53,7 +53,7 @@ class RegisterForm(UserCreationForm):
         
     )
     discord = forms.CharField(
-        label="Discod ID",
+        label="Discord ID",
         widget=forms.TextInput(
             attrs={
                 "class": "mt-1 block text-xl rounded-sm p-2 text-white ring-4 ring-cyan-300 bg-transparent focus-visible:outline-none"
@@ -84,12 +84,12 @@ class LoginForm(forms.ModelForm):
         widgets = {
             "regno": forms.TextInput(
                 attrs={
-                    "class": "mt-2 block text-xl rounded-sm p-2 text-white ring-4 ring-green-400 bg-transparent focus-visible:outline-none"
+                    "class": "mt-2 block text-xl rounded-sm p-2 text-white ring-4 ring-yellow-300 bg-transparent focus-visible:outline-none"
                 }
             ),
             "password": forms.PasswordInput(
                 attrs={
-                    "class": "mt-2 block text-xl rounded-sm p-2 text-white ring-4 ring-green-400 bg-transparent focus-visible:outline-none"
+                    "class": "mt-2 block text-xl rounded-sm p-2 text-white ring-4 ring-yellow-300 bg-transparent focus-visible:outline-none"
                 }
             ),
         }

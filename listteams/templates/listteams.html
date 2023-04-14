@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content%}
-  <div class="mx-auto mt-40 w-7/12 text-6xl heading glitch">Team Members</div>
+  <div class="mx-auto mt-40 w-7/12 text-6xl heading glitch">All teams</div>
+
   {% for game,team in games.items %}
   <p class="mx-auto mt-40 w-7/12 text-3xl text-yellow-300 heading glitch">{{game}}</p>
 
@@ -12,7 +13,6 @@
             <th class="p-2">RegNo</th>
             <th class="p-2">Name</th>
             <th class="p-2">Role</th>
-            <th class="p-2">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -28,21 +28,12 @@
                 <td class="p-2">{{key}}</td>
                 <td class="p-2">{{value}}</td>
                 <td class="p-2">Member</td>
-                <td class="p-2"><button name="regno" type="submit" class="crazy-text" value="{{key}} {{game}}">Remove</button></td>
             </tr>
             {% endfor %}
         </form>
       </tbody>
     </table>
     </div>
-    <div class="mx-auto w-7/12 mt-5 mb-80">
-      <form method="post">
-        {% csrf_token %}
-        <button name="team" type="submit" class="text-xl text-white heading glitch crazy-text" value="{{game}}">Disband</button>
-      </form>
-    </div>
     {% endfor %}
-
-
 
 {% endblock content %}

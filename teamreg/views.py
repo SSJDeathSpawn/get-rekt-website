@@ -58,20 +58,25 @@ def view_members(request):
     if teams is None:
         return HttpResponseForbidden("You must be a team leader to view teams")
     if request.method=="POST":
-        regno=request.POST["regno"].split()
-        teams.get(game=Game.objects.get(name=' '.join(regno[1:]))).members.get(regno=regno[0]).delete()
-        
-        
-        return redirect("teamreg:view")
+        if 'regno' in request.POST:
+            regno=request.POST['regno'].split(" ")[0]
+            name=request.POST['regno'].split(" - ")[-1]
+            teams.get(game=Game.objects.get(name=name)).members.get(regno=regno).delete()
+            
+            return redirect("teamreg:view")
+        elif 'team' in request.POST:
+            team = ' - '.join(request.POST['team'].split(' - ')[:-1])
+            teams.get(name=team).delete()
+            return redirect("teamreg:view")
     context={'games':{}}
     for team in teams:
-        context['games'][team.game.name+"-"+team.name]={}
-        context['games'][team.game.name+"-"+team.name]['leader']={'regno':request.user.regno,'name':request.user.name}
+        context['games'][team.name +" - "+ team.game.name]={}
+        context['games'][team.name +" - "+ team.game.name]['leader']={'regno':request.user.regno,'name':request.user.name}
         members=list(team.members.exclude(regno=request.user.regno))
         memberdict={}
         for i in members:
             memberdict[i.regno]=i.name
-        context['games'][team.game.name+"-"+team.name]['members']=memberdict
+        context['games'][team.name + " - " + team.game.name]['members']=memberdict
         
     
     return render(request,"viewmembers.html",context)

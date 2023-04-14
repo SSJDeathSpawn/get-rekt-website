@@ -15,6 +15,16 @@
                 --tertiary: #df2046;
             }
 
+            .modal {
+              transition: opacity 0.25s ease;
+            }
+            body.modal-active {
+              overflow-x: hidden;
+              overflow-y: visible !important;
+            }
+
+            .opacity-95 {opacity: .95;}
+
             input::-webkit-outer-spin-button,
             input::-webkit-inner-spin-button {
               -webkit-appearance: none;
@@ -320,11 +330,30 @@
     <body>
         <div class="circle one"></div>
         <div class="circle two"></div>
+<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+  <div class="modal-overlay absolute w-full h-full bg-black opacity-95"></div>
+
+  <div class="modal-container fixed w-full h-full z-50 overflow-y-auto ">
+
+    <!-- Add margin if you want to see grey behind the modal-->
+    <div class="modal-content container mx-auto h-auto text-left p-4">
+     
+	  <!--Title-->
+      <div class="flex justify-between items-center pb-2">
+        <p class="text-2xl text-white font-bold">Notice</p>
+      </div>
+
+      <!--Body-->
+      <p class="text-white">This content is not responsive yet, please use a laptop</p>
+
+    </div>
+  </div>
+</div>
 
         <nav class="flex items-center justify-between flex-wrap p-6 bg-transparent font-Almaria,serif">
             <div class="flex items-center flex-shrink-0 text-white mr-6">
               <a href="{% url 'index' %}" class="font-semibold text-3xl crazy-text tracking-tight heading-special glitch">
-                  <img src="{% static 'LOGO.png' %}"/>
+                  <img class="hidden lg:block"src="{% static 'LOGO.png' %}"/>
               </a>
             </div>
             <div class="block lg:hidden">
@@ -353,9 +382,9 @@
                     {% endif %}
 
                     {% if request.user.is_authenticated %}
-                        <a href="{% url 'userext:logout' %}" class="inline-block text-xl px-4 pb-4 text-cyan-200 leading-none heading glitch login">Logout</a>
+                        <a href="{% url 'userext:logout' %}" class="hidden lg:inline-block text-xl px-4 pb-4 text-cyan-200 leading-none heading glitch login">Logout</a>
                     {% else %}
-                        <a href="{% url 'userext:login' %}" class="inline-block text-xl px-4 pb-4 text-cyan-200 leading-none heading glitch">Login</a>
+                        <a href="{% url 'userext:login' %}" class="hidden lg:inline-block text-xl px-4 pb-4 text-cyan-200 leading-none heading glitch">Login</a>
                     {% endif %}
                 </div>
             </div>
@@ -419,6 +448,30 @@
                     }
                 }
 
+                var openmodal = document.querySelectorAll('.modal-open')
+                  for (var i = 0; i < openmodal.length; i++) {
+                    openmodal[i].addEventListener('click', function(event){
+                    event.preventDefault()
+                    toggleModal()
+                    })
+                  }
+                  
+                  const overlay = document.querySelector('.modal-overlay')
+                  overlay.addEventListener('click', toggleModal)
+                  
+                  var closemodal = document.querySelectorAll('.modal-close')
+                  for (var i = 0; i < closemodal.length; i++) {
+                    closemodal[i].addEventListener('click', toggleModal)
+                  }
+
+                function toggleModal () {
+                    const body = document.querySelector('body')
+                    const modal = document.querySelector('.modal')
+                    modal.classList.toggle('opacity-0')
+                    modal.classList.toggle('pointer-events-none')
+                    body.classList.toggle('modal-active')
+                  }
+
                 const animElements = document.querySelectorAll(".animate")
                 observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -436,6 +489,9 @@
                 animElements.forEach(element => {
                     observer.observe(element)
                 })
+                if(window.screen.width<600){
+                  toggleModal();
+                }
             </script>
         </body>
     </html>

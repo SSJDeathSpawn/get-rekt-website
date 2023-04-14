@@ -2,27 +2,29 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm,LoginForm
 from django.contrib.auth import login as login_user,authenticate,logout as logout_user
 from .pullcsv import name
+from teamreg.models import Student
 
 
 def register(request):
     context={}
     if (request.POST):
-        data={'regno':request.POST['regno'],'password1':request.POST['password1'],'password2':request.POST['password2'],'name':''}
-        data['name']=name(data['regno'])
-        form=RegisterForm(data)
+        
+        
+        form=RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             regno=form.cleaned_data.get('regno')
             raw_password=form.cleaned_data.get('password1')
             account=authenticate(regno=regno,password=raw_password)
             login_user(request,account)
+            s=Student(regno=regno,name=form.cleaned_data.get('name'),email=form.cleaned_data.get('email'),phone=form.cleaned_data.get('phone'),discordid=form.cleaned_data.get('discord'))
+            s.save()
             return redirect('userext:index')
         else:
             form.fields.pop('name')
             context['form']=form
     else:
         form=RegisterForm()
-        form.fields.pop('name')
         context['form']=form
     return render(request,'register.html',context)
 

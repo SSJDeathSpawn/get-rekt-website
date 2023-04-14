@@ -15,7 +15,7 @@ class Student(models.Model):
     regno=models.CharField(max_length=9)
     name = models.CharField(max_length=30)
     email = models.EmailField(max_length=40)
-    phone = models.IntegerField()
+    phone = models.BigIntegerField()
     discordid = models.CharField(max_length=50)
 
 

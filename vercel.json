@@ -1,14 +1,14 @@
 {
-    "builds": [
-      {
-        "src": "getrekt/wsgi.py",
-        "use": "@vercel/python"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "getrekt/wsgi.py"
-      }
-    ]
+  "builds": [
+    {
+      "src": "getrekt/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "getrekt/wsgi.py"
+    }
+  ]
 }

@@ -369,60 +369,73 @@
                 Contact Us
             </div>
             <div class="md:w-4/12 w-5/12 pl-5 mt-2 mb-5 border-r-2 border-red-700">
-                <span class="block text-yellow-300 text-lg md:text-2xl heading">Name</span>
+                <span class="block text-yellow-300 text-lg md:text-2xl heading">Yashvardhan Goel</span>
                 <span class="block text-red-700 text-lg md:text-md heading">
-                    Event Coordinator
+                    Management Coordinator
                 </span>
-                <span class="block text-white text-2xl md:text-2xl">+91 7021249670<span>
+                <span class="block text-white text-2xl md:text-2xl">+91 82228 90101<span>
+                <span class="block text-red-700 text-2xl md:text-2xl">workforgoat@gmail.com<span>
+                <span class="block text-yellow-300 text-lg mt-5 md:text-2xl heading">Adikesavan Dhayalan</span>
+                <span class="block text-red-700 text-lg md:text-md heading">
+                    Technical Coordinator
+                </span>
+                <span class="block text-white text-2xl md:text-2xl">+91 94999 02182<span>
+                <span class="block text-red-700 text-2xl md:text-2xl">adikesavan2099@gmail.com<span>
             </div>
-                    <div class="md:w-4/12 w-4/12 border-l-2 border-red-700 md:pl-20 pl-5 mt-2 mb-5">
-                        <span class="block text-yellow-300 md:text-2xl text-lg heading">Name</span>
-                        <span class="block text-red-700 md:text-lg text-sm heading">
-                            Event Coordinator
-                        </span>
-                        <span class="block text-white md:text-2xl text-md heading">Instagram<span>
-                                <span class="block md:text-xl text-md">&nbsp;<span>
-                                        <span class="block text-red-700 text-2xl md:text-2xl">example@gmail.com<span></div>
-                                           <div class="w-full block text-center bg-zinc-950 text-white">
-                                                Copyright (c) 2023 TAG Club VIT. All Rights Reserved.
-                                            </div>
-                                        </footer>
-                                        <!-- SCRIPT AT THE BOTTOM SO IT LOADS AFTER THE TEMPLATES -->
-                                        <script>
+            <div class="md:w-4/12 w-4/12 border-l-2 border-red-700 md:pl-20 pl-5 mt-2 mb-5">
+              <span class="block text-yellow-300 text-lg md:text-2xl heading">Aravind Sreenevas</span>
+              <span class="block text-red-700 text-lg md:text-md heading">
+                  Management Coordinator
+              </span>
+              <span class="block text-white text-2xl md:text-2xl">+91 87623 27290<span>
+              <span class="block text-red-700 text-2xl md:text-2xl">Mittal.aayush2020@gmail.com<span>
+              <span class="block text-yellow-300 text-lg mt-5  md:text-2xl heading">Aayush Mittal</span>
+              <span class="block text-red-700 text-lg md:text-md heading">
+                  Design Coordinator
+              </span>
+              <span class="block text-white text-2xl md:text-2xl">+91 95931 38891<span>
+              <span class="block text-red-700 text-2xl md:text-2xl">aayush.mittal2022@vitstudent.ac.in<span>
+            </div>
+            <div class="w-full block text-center bg-zinc-950 text-white">
+              Copyright (c) 2023 TAG Club VIT. All Rights Reserved.
+            </div>
+            </footer>
+            <!-- SCRIPT AT THE BOTTOM SO IT LOADS AFTER THE TEMPLATES -->
+            <script>
 
-                                           function closeAlert(event){
-                                              let element = event.target;
-                                              while(element.nodeName !== "BUTTON"){
-                                                element = element.parentNode;
-                                              }
-                                              element.parentNode.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode.parentNode);
-                                            }
-                                            function hide() {
-                                                var elem = document.getElementById('menu')
-                                                if (elem.style.display !== 'none') {
-                                                    elem.style.display = 'none';
-                                                } else {
-                                                    elem.style.display = 'block';
-                                                }
-                                            }
+               function closeAlert(event){
+                  let element = event.target;
+                  while(element.nodeName !== "BUTTON"){
+                    element = element.parentNode;
+                  }
+                  element.parentNode.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode.parentNode);
+                }
+                function hide() {
+                    var elem = document.getElementById('menu')
+                    if (elem.style.display !== 'none') {
+                        elem.style.display = 'none';
+                    } else {
+                        elem.style.display = 'block';
+                    }
+                }
 
-                                            const animElements = document.querySelectorAll(".animate")
-                                            observer = new IntersectionObserver((entries) => {
-                                                entries.forEach(entry => {
-                                                    if (entry.intersectionRatio > 0) {
-                                                        entry.target.classList.add("loadin")
-                                                    } else {
+                const animElements = document.querySelectorAll(".animate")
+                observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.intersectionRatio > 0) {
+                            entry.target.classList.add("loadin")
+                        } else {
 
-                                                        entry.target.classList.remove("loadin")
-                                                    }
+                            entry.target.classList.remove("loadin")
+                        }
 
-                                                })
+                    })
 
-                                            }, {rootMargin: "-250px"})
+                }, {rootMargin: "-250px"})
 
-                                            animElements.forEach(element => {
-                                                observer.observe(element)
-                                            })
-                                        </script>
-                                    </body>
-                                </html>
+                animElements.forEach(element => {
+                    observer.observe(element)
+                })
+            </script>
+        </body>
+    </html>

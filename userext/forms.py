@@ -6,7 +6,7 @@ from .pullcsv import check
 
 
 class RegisterForm(UserCreationForm):
-    field_order = ["regno", "password1", "password2", "name"]
+    field_order = ["regno", "password1", "password2", "name","email","phone","discord"]
 
     password1 = forms.CharField(
         label="Password",
@@ -25,6 +25,42 @@ class RegisterForm(UserCreationForm):
         ),
         help_text="Enter the same password as above, for verification.",
     )
+    name = forms.CharField(
+        label="Name",
+        widget=forms.TextInput(
+            attrs={
+                "class": "mt-1 block text-xl rounded-sm p-2 text-white ring-4 ring-cyan-300 bg-transparent focus-visible:outline-none"
+            }
+        ),
+        
+    )
+    email = forms.EmailField(
+        label="Email Address",
+        widget=forms.EmailInput(
+            attrs={
+                "class": "mt-1 block text-xl rounded-sm p-2 text-white ring-4 ring-cyan-300 bg-transparent focus-visible:outline-none"
+            }
+        ),
+        
+    )
+    phone = forms.IntegerField(
+        label="Phone No",
+        widget=forms.NumberInput(
+            attrs={
+                "class": "mt-1 block text-xl rounded-sm p-2 text-white ring-4 ring-cyan-300 bg-transparent focus-visible:outline-none"
+            }
+        ),
+        
+    )
+    discord = forms.CharField(
+        label="Discod ID",
+        widget=forms.TextInput(
+            attrs={
+                "class": "mt-1 block text-xl rounded-sm p-2 text-white ring-4 ring-cyan-300 bg-transparent focus-visible:outline-none"
+            }
+        ),
+        
+    )
 
     class Meta:
         model = UserEXT
@@ -38,13 +74,7 @@ class RegisterForm(UserCreationForm):
         }
         labels = {"password": "Password", "regno": "Registration Number"}
 
-    def clean_regno(self):
-        regno = self.cleaned_data["regno"]
-        if not (check(regno)):
-            raise forms.ValidationError(
-                "Registration Number is not eligible for this event"
-            )
-        return regno
+
 
 
 class LoginForm(forms.ModelForm):

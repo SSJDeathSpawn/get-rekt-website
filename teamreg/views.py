@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from .forms import TeamForm, AddMemberForm
-from .models import Team, Student
+from .models import Team, Student, Game
 
 def index(request):
     return redirect('index')
@@ -12,53 +12,66 @@ def index(request):
 @login_required(login_url="/user/login")
 def create_team(request):
     if request.method == "POST":
-        form = TeamForm(request.POST, leader=request.user)
+        data={"name":request.POST["name"],"game":request.POST["game"],"leader":request.user}
+        form = TeamForm(data)
         if form.is_valid():
             team = form.save()
-            team.members.add(Student.objects.filter(regno=request.user.regno).first())
+            team.members.add(Student.objects.get(regno=request.user.regno))
             return redirect("teamreg:view")
         else:
             context = {"form": form, "request": request}
             return render(request, "newteam.html", context)
-    form = TeamForm(leader=request.user)
+    form = TeamForm()
+    form.fields.pop("leader")
     context = {"form": form, "request": request}
-    print(bool(request.user.leader.all()))
+    
     return render(request, "newteam.html", context)
 
 
 @login_required(login_url="/user/login")
 def add_members(request):
-    team = Team.objects.filter(leader=request.user).first()
+    team = Team.objects.filter(leader=request.user)
     if team is None:
         return HttpResponseForbidden("You must be a team leader to add members")
     if request.method == "POST":
-        form = AddMemberForm(request.POST,team=team)
+        form = AddMemberForm(request.POST)
         if form.is_valid():
-            
-            team.members.add(Student.objects.filter(regno=form.cleaned_data['regno']).first())
+            form.save()
+            form.cleaned_data['team'].members.add(Student.objects.filter(regno=request.POST["regno"]).last()) 
             return redirect("teamreg:add")
         else:
            context = {"request": request, "form": form}
            return render(request, "addmembers.html", context) 
-    form = AddMemberForm(team=team)
+    form = AddMemberForm()
+    team=list(i.id for i in team if i.members.count()<i.game.max)
+    if(len(team)==0):
+        context={"request":request,"form":None}
+        return render (request,"addmembers.html",context)
+    form.fields["team"].queryset=Team.objects.filter(id__in=team)
     context = {"request": request, "form": form}
     return render(request, "addmembers.html", context)
 
 
 @login_required(login_url="/user/login")
 def view_members(request):
-    team = Team.objects.filter(leader=request.user).first()
-    if team is None:
+    teams = Team.objects.filter(leader=request.user)
+    if teams is None:
         return HttpResponseForbidden("You must be a team leader to view teams")
     if request.method=="POST":
-        regno=request.POST["regno"]
+        regno=request.POST["regno"].split()
+        teams.get(game=Game.objects.get(name=' '.join(regno[1:]))).members.get(regno=regno[0]).delete()
         
-        team.members.remove(Student.objects.get(regno=regno))
         
         return redirect("teamreg:view")
-    members=list(team.members.exclude(regno=request.user.regno))
-    memberdict={}
-    for i in members:
-        memberdict[i.regno]=i.name
-    context={"leader":{"regno":request.user.regno,"name":request.user.name},"members":memberdict}
+    context={'games':{}}
+    for team in teams:
+        context['games'][team.game.name+"-"+team.name]={}
+        context['games'][team.game.name+"-"+team.name]['leader']={'regno':request.user.regno,'name':request.user.name}
+        members=list(team.members.exclude(regno=request.user.regno))
+        memberdict={}
+        for i in members:
+            memberdict[i.regno]=i.name
+        context['games'][team.game.name+"-"+team.name]['members']=memberdict
+        
+    
     return render(request,"viewmembers.html",context)

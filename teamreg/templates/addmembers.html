@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="mx-auto mt-40 w-7/12 text-6xl heading glitch">Add Members</div>
+{% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <div role="alert" class="z-40 inset-x-0 top-0 fixed flex justify-center">
+      <div class="grid grid-rows-2 justify-center mt-2 ml-2 mr-2 mb-2 w-full md:w-1/2">
+        <div class="relative bg-red-500 text-white font-bold rounded-t px-4 py-2">
+          Oops
+          <button class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none" onclick="closeAlert(event)">
+              <span>×</span>
+          </button>
+        </div>
+        <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+          <p>{{ error }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  {% endif %}
+  <div class="mx-auto mt-40 w-7/12 text-green-300 text-3xl heading glitch">Add Members</div>
 
   <form method="post">
       {% csrf_token %}

@@ -18,14 +18,14 @@
     </div>
     {% endfor %}
   {% endif %}
+
   <div class="mx-auto mt-40 w-7/12 text-6xl heading glitch">Create a team</div>
-  
   <form method="post">
       {% csrf_token %}
-      <div class="mx-auto w-7/12 mt-5">
+      <div class="mx-auto w-7/12 mt-5 text-2xl">
         {% for field in form %}
 
-          <div class="text-white mt-7 boxes-container text-lg form-header">{{ field.label }}</div>
+          <div class="text-white mt-7 boxes-container form-header">{{ field.label }}</div>
         {{ field }}
 
             {% for error in field.errors %} 
@@ -34,7 +34,7 @@
 
         {% endfor %}
 
-      <button type="submit" class="mt-10 mb-40 bg-yellow-300 rounded-md p-3 text-md">Create Team</button>
+      <button type="submit" class="mt-10 mb-40 border-4 border-yellow-400 rounded-full hover:bg-yellow-300 hover:text-black rounded-md p-3 text-2xl link-y">Create Team</button>
       </div>
   </form>
   </div>
